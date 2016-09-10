@@ -18,6 +18,9 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)"""
 
 
 @app.route('/')
+def test():
+    return render_template('test.html')
+
 @app.route('/start_streaming')
 def start_streaming():
 
@@ -25,6 +28,12 @@ def start_streaming():
 @app.route('/stop_streaming')
 def stop_streaming():
     stop_logging()
+
+
+@app.route('/pause_streaming')
+
+
+pause_logging()
 
 
 def send_distraction():
@@ -39,8 +48,7 @@ def start_logging():
 def stop_logging():
 
 
+def pause_logging():
+
+
 @app.teardown_appcontext
-def close_db(error):
-    """Closes the database again at the end of the request."""
-    if hasattr(g, 'sqlite_db'):
-        g.sqlite_db.close()
