@@ -57,14 +57,14 @@
 
         $scope.startStopTimerWithInterval = function () {
             if (!$scope.running) {
-                $scope.concentrationColor();
-                document.getElementById("concentrationScore").innerHTML = $scope.concentration + '% Focused';
                 $scope.timerWithInterval = 0;
                 if ($scope.myInterval) {
                     $interval.cancel($scope.myInterval);
                 }
                 $scope.onInterval = function () {
                     $scope.timerWithInterval++;
+                    document.getElementById("concentrationScore").innerHTML = $scope.concentration + '% Focused';
+                    $scope.concentrationColor();
                     if ($scope.timerWithInterval == 3000) {
                         $scope.playAlert();
                     }
