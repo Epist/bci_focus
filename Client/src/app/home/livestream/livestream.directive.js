@@ -20,6 +20,7 @@
     function LineChartLinkFn(scope, element, attr) {
         linkFn = this;
         running = scope.getIsStreamRunning;
+        console.log(running);
 
         chart = new Highcharts.Chart({
             chart: {

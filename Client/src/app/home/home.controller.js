@@ -2,7 +2,7 @@
     angular.module('app.home')
         .controller('HomeCtrl', ['RESTService', '$scope', '$timeout', '$interval', HomeController]);
 
-    var ctrl, rest;
+    var ctrl, rest, chart;
 
     function HomeController(RESTService, $scope, $timeout, $interval) {
         ctrl = this;
@@ -14,6 +14,27 @@
         $scope.concentration = 80;
         $scope.isDisplayStreaming = false;
         $scope.isStreamRunning = false;
+
+
+        $scope.showStreamDisplay = function () {
+            $scope.isDisplayStreaming = true;
+        };
+
+        $scope.hideStreamDisplay = function () {
+            $scope.isDisplayStreaming = false;
+        };
+
+        $scope.startStreamDisplay = function () {
+            $scope.isStreamRunning = true;
+        };
+
+        $scope.stopStreamDisplay = function () {
+            $scope.isStreamRunning = false;
+        };
+
+        $scope.getIsStreamRunning = function () {
+            return $scope.isStreamRunning;
+        };
 
         $scope.startStopTimerWithInterval = function () {
             if (!$scope.running) {
@@ -33,6 +54,9 @@
                 document.getElementById("startStop").innerHTML = "Stop BCI";
                 $scope.running = true;
 
+                $scope.showStreamDisplay();
+                $scope.startStreamDisplay();
+
                 //Need to add code to start the BCI instance
 
             } else {
@@ -41,7 +65,7 @@
                 document.getElementById("concentrationScore").innerHTML = '';
                 document.getElementById("startStop").innerHTML = "Start BCI";
 
-
+                // $scope.hideStreamDisplay();
                 //Need to add the code to stop the BCI instance
             }
 
@@ -68,28 +92,6 @@
             var audio = new Audio('/assets/focus_alert.mp3');
             audio.play();
         };
-
-
-        $scope.showStreamDisplay = function () {
-            $scope.isDisplayStreaming = true;
-        };
-
-        $scope.hideStreamDisplay = function () {
-            $scope.isDisplayStreaming = false;
-        };
-
-        $scope.startStreamDisplay = function () {
-            $scope.isStreamRunning = true;
-        };
-
-        $scope.stopStreamDisplay = function () {
-            $scope.isStreamRunning = false;
-        };
-
-        $scope.getIsStreamRunning = function () {
-            return $scope.isStreamRunning;
-        };
-
 
     }
 
