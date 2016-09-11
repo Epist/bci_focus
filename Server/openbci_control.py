@@ -17,9 +17,10 @@ import lib.streamerlsl as streamerlsl
 from multiprocessing import Process
 
 
-class OpenBCIAdapter(Process):
+class OpenBCIControl(Process):
 
     def __init__(self):
+        super().__init__()
         self.paused = False
 
     def run(self):
@@ -40,21 +41,20 @@ class OpenBCIAdapter(Process):
         # ask alex about threading here
         self._create_lsl()
         self.start()
-        # self._send_to_ns()
 
     def pause_streaming(self):
         '''
         Public function for pausing the streaming pipeline (halting OpenBCI to LSL)
 s       '''
-        paused = True
+        self.paused = True
         self._stop_lsl()
 
     def resume_streaming(self):
         '''
         Public function for resuming the OpenBCI+LSL stream
         '''
-        paused = False
-        self._resume_lsl()
+        self.paused = False
+        self._start_lsl()
 
     def stop_streaming(self):
         '''
@@ -74,9 +74,6 @@ s       '''
         '''
         This method begins OpenBCI streaming into the LSL
         '''
-        self.lsl.start_streaming()
-
-    def _resume_lsl(self):
         self.lsl.start_streaming()
 
     def _stop_lsl(self):
