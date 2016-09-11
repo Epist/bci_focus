@@ -14,11 +14,19 @@
 
 import lib.neuroscale_deploy as ns
 import lib.streamerlsl as streamerlsl
+from multiprocessing import Process
 
 
-class openbci_control(object):
+class OpenBCIControl(Process):
     def __init__(self):
+        super().__init__()
         self.paused = False
+
+    def run(self):
+        # ask alex about threading here
+        self._start_lsl()
+        self._send_to_ns()
+
 
     ### PUBLIC FUNCTIONS
     def get_pause_state(self):
@@ -30,22 +38,22 @@ class openbci_control(object):
         '''
 
         # ask alex about threading here
-        self._start_lsl()
-        # self._send_to_ns()
+        self._create_lsl()
+        self.start()
 
     def pause_streaming(self):
         '''
         Public function for pausing the streaming pipeline (halting OpenBCI to LSL)
 s       '''
-        paused = True
+        self.paused = True
         self._stop_lsl()
 
     def resume_streaming(self):
         '''
         Public function for resuming the OpenBCI+LSL stream
         '''
-        paused = False
-        self._resume_lsl()
+        self.paused = False
+        self._start_lsl()
 
     def stop_streaming(self):
         '''
@@ -54,16 +62,17 @@ s       '''
         self._stop_lsl()
         ## kill NS instance here
 
+        self.terminate()
+
     ### PRIVATE FUNCTIONS
+    def _create_lsl(self):
+        self.lsl = streamerlsl.StreamerLSL(GUI=False)
+        self.lsl.create_lsl()
+
     def _start_lsl(self):
         '''
         This method begins OpenBCI streaming into the LSL
         '''
-        self.lsl = streamerlsl.StreamerLSL(GUI=False)
-        self.lsl.create_lsl()
-        self.lsl.start_streaming()
-
-    def _resume_lsl(self):
         self.lsl.start_streaming()
 
     def _stop_lsl(self):
@@ -77,3 +86,4 @@ s       '''
         This begins the NeuroScale deployment. NeuroScale will read from LSL
         '''
         ns.deploy()
+
