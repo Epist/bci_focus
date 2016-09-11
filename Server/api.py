@@ -59,10 +59,11 @@ def resume_streaming():
         return ("Paused")
 
 
-@app.route('/send_distraction')
-def send_distraction():
+# @app.route('/send_distraction')
+@socketio.on('/send_distraction')
+def send_distraction(data):
+    emit('distraction', data, broadcast=True)
 
-    return
 
 def send_analytics():
     return
