@@ -39,13 +39,13 @@ def deploy():
     # in this example we will launch the "Concentration Index" pipeline,
     # which computes a concentration index (note that there are some alternative
     # variants of this pipeline available)
-    pipeline_name = 'Concentration (Generic, Parametric, Normalized)'
+    pipeline_name = 'Concentration (Generic)'
 
     # optionally the instance id if you already have an instance running
     instance_id = ''
 
     # this is the local LSL stream that we will send up to the cloud
-    input_stream = 'openbci_eeg'
+    input_stream = 'openbci_eeg_team5'
 
     # this is the local stream that we forward back to LSL
     output_stream = 'ConcentrationStream'

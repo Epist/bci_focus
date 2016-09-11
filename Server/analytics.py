@@ -40,10 +40,10 @@ class Data_Buffer():
         '''
         This will plot the data in data_list. Used for debugging
         '''
-    x = np.arange(0, len(self.data_list))
-    y = self.data_list
-    plt.plot(x, y)
-    plt.show()
+        x = np.arange(0, len(self.data_list))
+        y = self.data_list
+        plt.plot(x, y)
+        plt.show()
 
 
 ###############################

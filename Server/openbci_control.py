@@ -25,9 +25,7 @@ class OpenBCIControl(Process):
 
     def run(self):
         # ask alex about threading here
-        self._start_lsl()
-        self._send_to_ns()
-
+        pass
 
     ### PUBLIC FUNCTIONS
     def get_pause_state(self):
@@ -40,7 +38,8 @@ class OpenBCIControl(Process):
 
         # ask alex about threading here
         self._create_lsl()
-        self.start()
+        self._start_lsl()
+        self._send_to_ns()
 
     def pause_streaming(self):
         '''

@@ -92,14 +92,12 @@ class StreamerLSL(QThread if GUI == True else object):
             time.sleep(.2)
 
     def send(self,sample):
-
       if self.GUI:
         self.count+=1
         if self.count % 5 == 0:
           self.new_data.emit(sample)
       try:
         self.outlet_eeg.push_sample(sample.channel_data)
-        self.outlet_aux.push_sample(sample.aux_data)
       except:
         print("Error! Check LSL settings")
 
@@ -107,7 +105,7 @@ class StreamerLSL(QThread if GUI == True else object):
       if default:
         random_id = random.randint(0,255)
         # default parameters
-        eeg_name = 'openbci_eeg'
+        eeg_name = 'openbci_eeg_team5'
         eeg_type = 'EEG'
         eeg_chan = self.eeg_channels
         eeg_hz = self.sample_rate
