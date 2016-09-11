@@ -1,7 +1,7 @@
 from pylsl import StreamInlet, resolve_stream
 import threading
 import time
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -39,15 +39,9 @@ class Data_Buffer:
 		lsl_thread = threading.Thread(target=self._collect_data())
 		lsl_thread.daemon = True
 		lsl_thread.run()
-	 
-	def _display_data(self):
-		x = np.arange(0,len(self.data_list))
-		y = self.data_list
-		plt.plot(x,y)
-		plt.show()
-
 
 	def _detect_distraction(self):
+
 		pass
 
 	def _emit_distraction_signal(self):
@@ -62,11 +56,11 @@ class Data_Buffer:
 		#this function returns the time series data of the concentration index, smoothed (1 value per second)
 		smoothed = np.zeros(len(self.data_list)/10)
 		second_sum = 0
-		for i in range(len(data_list)):
+		for i in range(len(self.data_list)):
 			while i % 10 != 0 or i == 0:
-				second_sum+=data_list[i]
+				second_sum+=self.data_list[i]
 			smoothed[i/10 - 1].append(second_sum/10)
-			second_sum = data_list[i]
+			second_sum = self.data_list[i]
 		return smoothed
 
 	def _calculate_longest_focus_period(self):
