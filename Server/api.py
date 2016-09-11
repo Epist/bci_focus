@@ -66,6 +66,7 @@ def send_distraction(data):
 
 
 def send_analytics():
+    emit('analytics', data, broadcast=True)
     return
 
 
