@@ -14,7 +14,7 @@ class Data_Buffer():
         This collects data from LSL outlet from NeuroScale for the concentration index output.
         '''
         start_time = time.time()
-        current_time = start_time
+        current_time = start_timeobci
 
         while (True):
             print(current_time)

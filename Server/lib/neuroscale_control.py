@@ -335,3 +335,39 @@ def deploy():
                           (instance_id, r.status_code))
     else:
         print('ERROR: could not launch instance (HTTP %i)' % r.status_code)
+
+def kill():
+    api_url = 'https://api.neuroscale.io'
+
+    # you also need to provide your own access token; for security
+    # reasons it is best to keep this string out of your code commits and instead
+    # read it from an environment variable or file (if you do not have a token,
+    # check our online documentation on how to generate one from your
+    # username/password combination)
+    access_token = '10e088ab-1374-4ad1-9dd2-3a995bce39a0'
+
+    # construct the HTTP header that will be used for authorization
+    auth_header = {'Authorization': 'Bearer ' + access_token}
+
+    # get current set of instances...
+    killed, notkilled = 0, 0
+    r = requests.get(api_url + '/v1/instances', headers=auth_header)
+    if r.status_code == 200:  # HTTP 200: ok
+        # kill each of them
+        for inst in r.json()['data']:
+            instance_id = inst['id']
+            r = requests.delete(api_url + '/v1/instances/' + instance_id,
+                                headers={'Authorization': 'Bearer ' + access_token})
+            if r.status_code == 204:
+                print('instance %s was deleted successfully' % instance_id)
+                killed += 1
+            else:
+                print('ERROR: instance %s was not deleted (HTTP %i)' %
+                      (instance_id, r.status_code))
+                notkilled += 1
+        if notkilled == 0:
+            print("Completed successfully (%i instances killed)." % killed)
+        else:
+            print("Completed with errors (%i killed, %i survived)." % (killed, notkilled))
+    else:
+        print('ERROR: could not list instances (HTTP %i)' % r.status_code)

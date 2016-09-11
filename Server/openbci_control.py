@@ -1,6 +1,6 @@
 #!/usr/bin/python
 '''
-  openbci_lsl.py
+  openbci_control.py
   ---------------
 
   This is the main module for establishing an OpenBCI stream through the Lab Streaming Layer (LSL).
@@ -12,7 +12,7 @@
 
 '''
 
-import lib.neuroscale_deploy as ns
+import lib.neuroscale_control as ns
 import lib.streamerlsl as streamerlsl
 from multiprocessing import Process
 
@@ -62,7 +62,7 @@ s       '''
         '''
         self._stop_lsl()
         ## kill NS instance here
-
+        ns.kill()
         self.terminate()
 
     ### PRIVATE FUNCTIONS
