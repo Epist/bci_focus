@@ -1,22 +1,25 @@
-<div class="jumbotron">
-    <div class="btn-group">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
-        <!--<label>Timer with timeout: {{timerWithTimeout | hhmmss}}</label>-->
-        <!--<button ng-click="startTimerWithTimeout()">Start Timer</button>-->
-        <!--<button ng-click="resetTimerWithTimeout()">reset tiemr</button>-->
-        <!--<br><br>-->
-        <span>
-            <label>Task time: {{timerWithInterval | hhmmss}}</label>
-            <!--<label>Time so far: {{ timerWithInterval | number : 'h:mm:ss' }}</label>-->
-            <span id="startStop" href="#Toggle_StartStop" ng-click="startStopTimerWithInterval()"
-                  class="btn btn-large btn-default">
-                Start BCI
-            </span>
-        </span>
+<div>
+    <!--<label>Timer with timeout: {{timerWithTimeout | hhmmss}}</label>-->
+    <!--<button ng-click="startTimerWithTimeout()">Start Timer</button>-->
+    <!--<button ng-click="resetTimerWithTimeout()">reset tiemr</button>-->
+    <!--<br><br>-->
+    <div class="row">
+        <div class="jumbotron">
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
 
-        <!--<a href="#Toggle_PauseResume" class="btn btn-large btn-success">-->
-        <!--Pause Resume-->
-        <!--</a>-->
+            <h2>Task time: {{timerWithInterval | hhmmss}}
+                <span id="startStop" href="#Toggle_StartStop" ng-click="startStopTimerWithInterval()"
+                      class="btn btn-large btn-primary">
+                Start BCI
+                </span>
+            </h2>
+            <!--<label>Time so far: {{ timerWithInterval | number : 'h:mm:ss' }}</label>-->
+
+        </div>
+    </div>
+    <div class="row">
+        This div is for the visualization element
+
     </div>
 
 </div>
