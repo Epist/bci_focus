@@ -16,9 +16,14 @@ import lib.neuroscale_deploy as ns
 import lib.streamerlsl as streamerlsl
 
 
-class OpenBCIAdapter:
+class OpenBCIAdapter(object):
+    def __init__(self):
+        self.paused = False
 
     ### PUBLIC FUNCTIONS
+    def get_pause_state(self):
+        return self.paused
+
     def start_streaming(self):
         '''
         Public function for starting the streaming pipeline (OpenBCI to LSL to NeuroPype)
@@ -32,12 +37,14 @@ class OpenBCIAdapter:
         '''
         Public function for pausing the streaming pipeline (halting OpenBCI to LSL)
 s       '''
+        paused = True
         self._stop_lsl()
 
     def resume_streaming(self):
         '''
         Public function for resuming the OpenBCI+LSL stream
         '''
+        paused = False
         self._resume_lsl()
 
     def stop_streaming(self):
