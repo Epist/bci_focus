@@ -1,2 +1,4 @@
 .idea/
-
+/Client/bin/
+/Client/node_modules/
+/Client/build/
