@@ -24,7 +24,7 @@ class OpenBCIControl(Process):
 
     def run(self):
         # ask alex about threading here
-        pass
+        self._send_to_ns()
 
     ### PUBLIC FUNCTIONS
     def get_pause_state(self):
@@ -34,11 +34,10 @@ class OpenBCIControl(Process):
         '''
         Public function for starting the streaming pipeline (OpenBCI to LSL to NeuroPype)
         '''
-
-        # ask alex about threading here
         self._create_lsl()
         self._start_lsl()
-        self._send_to_ns()
+        self.start()
+
 
     def pause_streaming(self):
         '''
@@ -65,7 +64,7 @@ s       '''
 
     ### PRIVATE FUNCTIONS
     def _create_lsl(self):
-        self.lsl = streamerlsl.StreamerLSL(GUI=False)
+        self.lsl = streamerlsl.StreamerLSL()
         self.lsl.create_lsl()
 
     def _start_lsl(self):
