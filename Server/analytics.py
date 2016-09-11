@@ -6,10 +6,10 @@ import numpy as np
 
 
 class Data_Buffer():
-	def __init__():
+	def __init__(self):
 		self.data_list = [] #this is the list that will hold the data
 
-	def _collect_data():
+	def _collect_data(self):
 		'''
 		This collects data from LSL outlet from NeuroScale for the concentration index output.
 		'''
@@ -22,12 +22,8 @@ class Data_Buffer():
 			current_time = time.time()
 			conc_index, timestamp = self.inlet.pull_sample()
 			self.data_list.append(conc_index)
-		# self.display(data_list)
 
-
-
-
-	def start_lsl_listener():
+	def _start_lsl_listener(self):
 		'''
 		This starts looking for the LSL outlet from NeuroScale. Once found, collect_data is launched.
 		:return:
@@ -39,7 +35,10 @@ class Data_Buffer():
 		lsl_thread.daemon = True
 		lsl_thread.run()
 	 
-	def _display_data():
+	def _display_data(self):
+        '''
+        This will plot the data in data_list. Used for debugging
+        '''
 		x = np.arange(0,len(self.data_list))
 		y = self.data_list
 		plt.plot(x,y)
@@ -54,12 +53,20 @@ class Data_Buffer():
 	def _detect_distraction(self):
         pass
 
-    def _emit_distraction_signal(self):
+    def send_distraction(self):
         pass
 
 
 
 	# POST-SESSION
+    def send_analytics(self):
+        '''
+        Send the collected analytics to the client
+        '''
+        mean = self._calculate_mean_concentration()
+        timeseries = self._calculate_conc_timeseries()
+        longest_focus_period = self._calculate_longest_focus_period()
+
 	def _calculate_mean_conc(self):
 		return np.mean(self.data_list)
 

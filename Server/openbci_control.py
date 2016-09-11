@@ -14,9 +14,17 @@
 
 import lib.neuroscale_deploy as ns
 import lib.streamerlsl as streamerlsl
+from multiprocessing import Process
 
 
-class OpenBCIAdapter:
+
+class OpenBCIAdapter(Process):
+
+    def run(self):
+        # ask alex about threading here
+        self._start_lsl()
+        self._send_to_ns()
+
 
     ### PUBLIC FUNCTIONS
     def start_streaming(self):
@@ -25,7 +33,8 @@ class OpenBCIAdapter:
         '''
 
         # ask alex about threading here
-        self._start_lsl()
+        self._create_lsl()
+        self.start()
         # self._send_to_ns()
 
     def pause_streaming(self):
@@ -47,13 +56,16 @@ s       '''
         self._stop_lsl()
         ## kill NS instance here
 
+        self.terminate()
+
     ### PRIVATE FUNCTIONS
+    def _create_lsl(self):
+        self.lsl = streamerlsl.StreamerLSL(GUI=False)
+        self.lsl.create_lsl()
     def _start_lsl(self):
         '''
         This method begins OpenBCI streaming into the LSL
         '''
-        self.lsl = streamerlsl.StreamerLSL(GUI=False)
-        self.lsl.create_lsl()
         self.lsl.start_streaming()
 
     def _resume_lsl(self):
@@ -70,3 +82,4 @@ s       '''
         This begins the NeuroScale deployment. NeuroScale will read from LSL
         '''
         ns.deploy()
+
