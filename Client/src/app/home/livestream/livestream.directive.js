@@ -5,7 +5,8 @@
         .directive('livestreamChart', ['livestreamService', LineChart]);
 
 
-    var livestreamService, chart, linkFn, running;
+    var livestreamService, chart, linkFn, running, mockData, i;
+
 
     function LineChart(livestream) {
         livestreamService = livestream;
@@ -20,6 +21,8 @@
     function LineChartLinkFn(scope, element, attr) {
         linkFn = this;
         running = scope.getIsStreamRunning;
+        mockData = scope.mockData;
+        i = 0;
         console.log(running);
 
         chart = new Highcharts.Chart({
@@ -41,6 +44,8 @@
             yAxis: {
                 minPadding: 0.2,
                 maxPadding: 0.2,
+                minRange: 0,
+                maxRange: 1,
                 title: {
                     text: 'Concentration %',
                     margin: 80
@@ -63,7 +68,12 @@
             var series = chart.series[0],
                 shift = series.data.length > 20; // shift if the series is
                                                  // longer than 20
-            var point = [Date.now(), Math.random()];
+            if(i >= mockData.length){
+                i = mockData.length - 1;
+            }
+
+            var point = [Date.now(), mockData[++i]];
+
 
             // add the point
             chart.series[0].addPoint(point, true, shift);
