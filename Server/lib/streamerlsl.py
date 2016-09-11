@@ -21,7 +21,7 @@ from collections import OrderedDict
 
 from pylsl import StreamInfo, StreamOutlet
 
-import Server.lib.open_bci_v3 as bci
+import lib.open_bci_v3 as bci
 
 GUI = True
 try:
