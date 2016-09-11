@@ -9,6 +9,12 @@ from flask import Flask, request, session, g, redirect, url_for, abort, render_t
 from openbci_control import OpenBCIControl
 from flask_socketio import SocketIO, send, emit
 import os
+
+# Included to mock timeseries
+import random
+import time
+
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
 # static_location=dir_path+"/Client/bin"
 # static_location = "/Users/Larry/PycharmProjects/bci_focus/Client/bin"
@@ -51,6 +57,10 @@ def stop_streaming():
     print("Stopping Stream")
     BCI_instance.stop_streaming()
     stop_logging()
+
+@app.route('/mock_data')
+def mock_data():
+    return ((time.time(), random.random()))
 
 
 @app.route('/pause_streaming')
