@@ -7,8 +7,8 @@ import numpy as np
 
 class Data_Buffer:
     def __init__(self):
-		self.data_list = [] #this is the list that will hold the data
-		self.time_list = [] #this will hold the adjusted timestamps
+        self.data_list = [] #this is the list that will hold the data
+        self.time_list = [] #this will hold the adjusted timestamps
 
 	def _collect_data(self):
 		'''
