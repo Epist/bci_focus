@@ -25,6 +25,9 @@
                 }
                 $scope.onInterval = function () {
                     $scope.timerWithInterval++;
+                    if ($scope.timerWithInterval == 3000) {
+                        $scope.playAlert();
+                    }
                 };
                 $scope.myInterval = $interval($scope.onInterval, 10);
                 document.getElementById("startStop").innerHTML = "Stop BCI";
@@ -59,6 +62,11 @@
             } else {
                 document.getElementById("concentrationScore").style.color = "green";
             }
+        };
+
+        $scope.playAlert = function () {
+            var audio = new Audio('/assets/focus_alert.mp3');
+            audio.play();
         };
 
 
