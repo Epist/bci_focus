@@ -39,7 +39,7 @@ def deploy():
     # in this example we will launch the "Concentration Index" pipeline,
     # which computes a concentration index (note that there are some alternative
     # variants of this pipeline available)
-    pipeline_name = 'Concentration (Generic, Parametric, Normalized) Test'
+    pipeline_name = 'Concentration (Generic, Parametric, Normalized)'
 
     # optionally the instance id if you already have an instance running
     instance_id = ''

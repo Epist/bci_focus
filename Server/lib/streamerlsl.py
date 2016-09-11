@@ -160,26 +160,26 @@ class StreamerLSL(QThread if GUI == True else object):
       #create StreamOutlet
       self.outlet_eeg = StreamOutlet(self.info_eeg)
       self.outlet_aux = StreamOutlet(self.info_aux)
-        
-      print ("--------------------------------------\n"+ \
-            "LSL Configuration: \n" + \
-            "  Stream 1: \n" + \
-            "      Name: " + eeg_name + " \n" + \
-            "      Type: " + eeg_type + " \n" + \
-            "      Channel Count: " + str(eeg_chan) + "\n" + \
-            "      Sampling Rate: " + str(eeg_hz) + "\n" + \
-            "      Channel Format: "+ eeg_data + " \n" + \
-            "      Source Id: " + eeg_id + " \n" + \
-            "  Stream 2: \n" + \
-            "      Name: " + aux_name + " \n" + \
-            "      Type: "+ aux_type + " \n" + \
-            "      Channel Count: " + str(aux_chan) + "\n" + \
-            "      Sampling Rate: " + str(aux_hz) + "\n" + \
-            "      Channel Format: " + aux_data +" \n" + \
-            "      Source Id: " + aux_id + " \n\n" + \
-            "Electrode Location Montage:\n" + \
-            str(labels) + "\n" + \
-            "---------------------------------------\n")
+      #
+      # print ("--------------------------------------\n"+ \
+      #       "LSL Configuration: \n" + \
+      #       "  Stream 1: \n" + \
+      #       "      Name: " + eeg_name + " \n" + \
+      #       "      Type: " + eeg_type + " \n" + \
+      #       "      Channel Count: " + str(eeg_chan) + "\n" + \
+      #       "      Sampling Rate: " + str(eeg_hz) + "\n" + \
+      #       "      Channel Format: "+ eeg_data + " \n" + \
+      #       "      Source Id: " + eeg_id + " \n" + \
+      #       "  Stream 2: \n" + \
+      #       "      Name: " + aux_name + " \n" + \
+      #       "      Type: "+ aux_type + " \n" + \
+      #       "      Channel Count: " + str(aux_chan) + "\n" + \
+      #       "      Sampling Rate: " + str(aux_hz) + "\n" + \
+      #       "      Channel Format: " + aux_data +" \n" + \
+      #       "      Source Id: " + aux_id + " \n\n" + \
+      #       "Electrode Location Montage:\n" + \
+      #       str(labels) + "\n" + \
+      #       "---------------------------------------\n")
 
     def cleanUp():
         board.disconnect()
@@ -190,23 +190,12 @@ class StreamerLSL(QThread if GUI == True else object):
       boardThread = threading.Thread(target=self.board.start_streaming,args=(self.send,-1))
       boardThread.daemon = True # will stop on exit
       boardThread.start()
-      # while True:
-      #   time.sleep(0.00001)
+
+
     def stop_streaming(self):
       self.board.stop()
-
-      #clean up any leftover bytes from serial port
-      # self.board.ser.reset_input_buffer()
       time.sleep(.1)
-      line = ''
-      # while self.board.ser.inWaiting():
-      #   # print("doing this thing")
-      #   c = self.board.ser.read().decode('utf-8', errors='replace')
-      #   line += c
-      #   time.sleep(0.001)
-      #   if (c == '\n'):
-      #       line = ''
-      # print("Streaming paused.\n")
+
 
     def begin(self):
         print ("--------------INFO---------------")
