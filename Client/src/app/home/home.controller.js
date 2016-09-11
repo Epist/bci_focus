@@ -30,8 +30,12 @@
         //timer with interval
         $scope.timerWithInterval = 0;
         $scope.running = false;
+        $scope.concentration = 80;
+
         $scope.startStopTimerWithInterval = function () {
             if (!$scope.running) {
+                $scope.concentrationColor();
+                document.getElementById("concentrationScore").innerHTML = $scope.concentration + '% Focused';
                 $scope.timerWithInterval = 0;
                 if ($scope.myInterval) {
                     $interval.cancel($scope.myInterval);
@@ -48,7 +52,9 @@
             } else {
                 $interval.cancel($scope.myInterval);
                 $scope.running = false;
+                document.getElementById("concentrationScore").innerHTML = '';
                 document.getElementById("startStop").innerHTML = "Start BCI";
+
 
                 //Need to add the code to stop the BCI instance
             }
@@ -60,6 +66,18 @@
             $scope.timerWithInterval = 0;
             $interval.cancel($scope.myInterval);
         };
+
+        //For coloring the concentration score
+        $scope.concentrationColor = function () {
+            if ($scope.concentration < 20) {
+                document.getElementById("concentrationScore").style.color = "red";
+            } else if ($scope.concentration < 50) {
+                document.getElementById("concentrationScore").style.color = "yellow";
+            } else {
+                document.getElementById("concentrationScore").style.color = "green";
+            }
+        };
+
 
 
     }
