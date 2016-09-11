@@ -16,7 +16,7 @@ import lib.neuroscale_deploy as ns
 import lib.streamerlsl as streamerlsl
 
 
-class OpenBCIAdapter(object):
+class openbci_control(object):
     def __init__(self):
         self.paused = False
 

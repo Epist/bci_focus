@@ -1,2 +1,2 @@
 from api import api
-from openbci_control import OpenBCIAdapter
+from openbci_control import openbci_control
