@@ -1,3 +1,5 @@
+# API
+
 import os
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
@@ -77,9 +79,9 @@ def resume_logging():
     return
 
 
-@app.teardown_appcontext
+""""@app.teardown_appcontext
 def teardown():
-    return
+    return"""
 
 
 if __name__ == '__main__':
