@@ -62,62 +62,94 @@ h2 {
   color: #666;
 }
 
-
 /**
- * Navigation
+ * Responsive Layout
  */
 
-.navbar {
-  margin-top: 20px;
-  
-  small {
-    font-size: 60%;
+#main {
+  min-height: 800px;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-flow: row;
+
+  #sidebar {
+    flex: 1 6 20%;
+    order: 1;
+  }
+
+  #page {
+    margin: 4px;
+    padding: 5px;
+    border-radius: 7pt;
+    flex: 3 1 60%;
+    order: 2;
+  }
+
+}
+
+@media all and (max-width: 640px) {
+  #main {
+    flex-direction: column-reverse;
   }
 }
 
 
+
+
 /**
- * Footer
+ * Global Styles
  */
 
-.footer {
-  margin-top: 80px;
-
-  .footer-inner {
-    padding: 40px 0;
-    border-top: 1px solid #DDD;
-  }
-
-  .social {
-    float: right;
-    margin: 0;
-    list-style: none;
-
-    li {
-      float: left;
-      margin-left: 20px;
-
-      a, a:visited {
-        color: @gray-light;
-        text-decoration: none;
-        font-size: 40px;
-        .transition( 250ms ease-in-out );
-
-        &:hover {
-          color: @gray;
-        }
-      }
-    }
-  }
+.profile-icon {
+  height: @profile-icon-diameter;
+  width: @profile-icon-diameter;
 }
 
+/**
+ * Spacing Utilities
+ */
+
+.m-t-10 {
+  margin-top: 10px !important;
+}
+
+.m-r-10 {
+  margin-right: 10px !important;
+}
+
+.m-b-10 {
+  margin-bottom: 10px !important;
+}
+
+.m-l-10 {
+  margin-left: 5px !important;
+}
+
+.m-t-5 {
+  margin-top: 5px !important;
+}
+
+.m-r-5 {
+  margin-right: 5px !important;
+}
+
+.m-b-5 {
+  margin-bottom: 5px !important;
+}
+
+.m-l-5 {
+  margin-left: 5px !important;
+}
 
 /**
  * Now that all app-wide styles have been applied, we can load the styles for
- * all the submodules and components we are using. 
+ * all the submodules and components we are using.
  *
  * TODO: In a later version of this boilerplate, I'd like to automate this.
  */
 
 @import '../app/home/home.less';
+@import '../app/header.less';
+@import '../app/footer.less';
 

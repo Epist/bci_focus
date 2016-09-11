@@ -193,6 +193,7 @@ module.exports = function (grunt) {
                 src: [
                     '<%= vendor_files.js %>',
                     'module.prefix',
+                    '<%= build_dir %>/src/**/*.module.js', // Import modules first!
                     '<%= build_dir %>/src/**/*.js',
                     '<%= html2js.app.dest %>',
                     '<%= html2js.common.dest %>',
@@ -613,6 +614,24 @@ module.exports = function (grunt) {
     }
 
     /**
+     * A utility function to place javascript files in proper import order.
+     * First vendor files, then modules, then the rest.
+     */
+    function enforceImportOrder(jsFiles) {
+        var modules = jsFiles.filter(function (file) {
+            return file.match(/\.module\.js/);
+        });
+        var vendor = jsFiles.filter(function (file) {
+            return file.match(/vendor/);
+        });
+        var rest = jsFiles.filter(function (file) {
+            return !file.match(/\.module\.js/) && !file.match(/vendor/);
+        });
+
+        return vendor.concat(modules.concat(rest));
+    }
+
+    /**
      * The index.html template includes the stylesheet and javascript sources
      * based on dynamic names calculated in this Gruntfile. This task assembles
      * the list into variables for the template to use and then runs the
@@ -623,6 +642,9 @@ module.exports = function (grunt) {
         var jsFiles = filterForJS(this.filesSrc).map(function (file) {
             return file.replace(dirRE, '');
         });
+
+        jsFiles = enforceImportOrder(jsFiles);
+
         var cssFiles = filterForCSS(this.filesSrc).map(function (file) {
             return file.replace(dirRE, '');
         });
