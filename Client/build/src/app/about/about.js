@@ -4,7 +4,7 @@ angular.module( 'ngBoilerplate.about', [
   'ui.bootstrap'
 ])
 
-.config(["$stateProvider", function config( $stateProvider ) {
+    .config(function config($stateProvider) {
   $stateProvider.state( 'about', {
     url: '/about',
     views: {
@@ -15,15 +15,15 @@ angular.module( 'ngBoilerplate.about', [
     },
     data:{ pageTitle: 'What is It?' }
   });
-}])
+    })
 
-.controller( 'AboutCtrl', ["$scope", function AboutCtrl( $scope ) {
+    .controller('AboutCtrl', function AboutCtrl($scope) {
   // This is simple a demo for UI Boostrap.
   $scope.dropdownDemoItems = [
     "The first choice!",
     "And another choice for you.",
     "but wait! A third!"
   ];
-}])
+    })
 
 ;
