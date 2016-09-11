@@ -11,6 +11,7 @@ module.exports = function ( karma ) {
     files: [
       <% scripts.forEach( function ( file ) { %>'<%= file %>',
       <% }); %>
+      'src/**/*.module.js',
       'src/**/*.js',
       'src/**/*.coffee',
     ],
