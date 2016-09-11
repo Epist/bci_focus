@@ -45,7 +45,7 @@ def deploy():
     instance_id = ''
 
     # this is the local LSL stream that we will send up to the cloud
-    input_stream = 'openbci_eeg_team5'
+    input_stream = 'openbci_eeg'
 
     # this is the local stream that we forward back to LSL
     output_stream = 'ConcentrationStream'
