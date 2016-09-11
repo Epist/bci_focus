@@ -6,10 +6,9 @@ from flask import Flask, request, session, g, redirect, url_for, abort, render_t
 from openbci_control import OpenBCIControl
 from flask_socketio import SocketIO, send, emit
 import os
-
 dir_path = os.path.dirname(os.path.realpath(__file__))
 # static_location=dir_path+"/Client/bin"
-static_location = "../Client/bin"
+static_location = "/Users/Larry/PycharmProjects/bci_focus/Client/bin"
 # print(static_location)
 app = Flask(__name__, static_folder=static_location, static_url_path=static_location)
 app.config['SECRET_KEY'] = 'secret!'
@@ -27,12 +26,10 @@ BCI_instance = OpenBCIControl()
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)"""
 
-
 @app.route('/')
 def root():
     print("serving static")
     return app.send_static_file('index.html')
-
 
 @app.route('/<path:path>')
 def send_js(path):
