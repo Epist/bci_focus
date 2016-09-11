@@ -18,7 +18,6 @@ from multiprocessing import Process
 
 
 class OpenBCIControl(Process):
-
     def __init__(self):
         super().__init__()
         self.paused = False

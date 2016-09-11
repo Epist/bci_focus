@@ -1,0 +1,155 @@
+/**
+ * This is the main application stylesheet. It should include or import all
+ * stylesheets used throughout the application as this is the only stylesheet in
+ * the Grunt configuration that is automatically processed.
+ */
+
+
+/**
+ * First, we include the Twitter Bootstrap LESS files. Only the ones used in the
+ * project should be imported as the rest are just wasting space.
+ */
+
+@import '../../vendor/bootstrap/less/bootstrap.less';
+
+
+/**
+ * This is our main variables file. We must include it last so we can overwrite any variable
+ * definitions in our imported stylesheets.
+ */
+
+@import 'variables.less';
+
+
+/**
+ * Typography
+ */
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(fonts/Roboto-Regular.woff) format('woff');
+}
+
+code, pre, .pre {
+  padding: 5px;
+  margin: 10px 0;
+  background-color: #EFEFEF;
+  border: 1px solid #DADADA;
+  border-radius: 3px;
+}
+
+code {
+  padding: 0 3px;
+}
+
+pre {
+  margin: 10px 0;
+  padding: 5px;
+}
+
+.page-header {
+  margin-top: 60px;
+
+  &:first-child {
+    margin-top: 20px;
+  }
+}
+
+h2 {
+  margin: 20px 0;
+  color: #666;
+}
+
+/**
+ * Responsive Layout
+ */
+
+#main {
+  min-height: 800px;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-flow: row;
+
+  #sidebar {
+    flex: 1 6 20%;
+    order: 1;
+  }
+
+  #page {
+    margin: 4px;
+    padding: 5px;
+    border-radius: 7pt;
+    flex: 3 1 60%;
+    order: 2;
+  }
+
+}
+
+@media all and (max-width: 640px) {
+  #main {
+    flex-direction: column-reverse;
+  }
+}
+
+
+
+
+/**
+ * Global Styles
+ */
+
+.profile-icon {
+  height: @profile-icon-diameter;
+  width: @profile-icon-diameter;
+}
+
+/**
+ * Spacing Utilities
+ */
+
+.m-t-10 {
+  margin-top: 10px !important;
+}
+
+.m-r-10 {
+  margin-right: 10px !important;
+}
+
+.m-b-10 {
+  margin-bottom: 10px !important;
+}
+
+.m-l-10 {
+  margin-left: 5px !important;
+}
+
+.m-t-5 {
+  margin-top: 5px !important;
+}
+
+.m-r-5 {
+  margin-right: 5px !important;
+}
+
+.m-b-5 {
+  margin-bottom: 5px !important;
+}
+
+.m-l-5 {
+  margin-left: 5px !important;
+}
+
+/**
+ * Now that all app-wide styles have been applied, we can load the styles for
+ * all the submodules and components we are using.
+ *
+ * TODO: In a later version of this boilerplate, I'd like to automate this.
+ */
+
+@import '../app/home/home.less';
+@import '../app/header.less';
+@import '../app/footer.less';
+

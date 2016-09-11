@@ -1,12 +1,19 @@
+# API
+
 import os
 from sqlite3 import dbapi2 as sqlite3
-from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
-from openbci_control import OpenBCIAdapter
-# create our little application :)
-app = Flask(__name__)
-BCI_instance = OpenBCIAdapter()
-
-
+from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, send_from_directory
+from openbci_control import OpenBCIControl
+from flask_socketio import SocketIO, send, emit
+import os
+dir_path = os.path.dirname(os.path.realpath(__file__))
+# static_location=dir_path+"/Client/bin"
+static_location = "/Users/Larry/PycharmProjects/bci_focus/Client/bin"
+# print(static_location)
+app = Flask(__name__, static_folder=static_location)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
+BCI_instance = OpenBCIControl()
 
 
 # Load default config and override config from an environment variable
@@ -19,6 +26,15 @@ BCI_instance = OpenBCIAdapter()
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)"""
 
+@app.route('/')
+def root():
+    print("serving static")
+    return app.send_static_file('index.html')
+
+@app.route('/<path:path>')
+def send_js(path):
+    print("path: " + path)
+    return send_from_directory(static_location, path)
 
 @app.route('/start_streaming')
 def start_streaming():
@@ -54,11 +70,19 @@ def resume_streaming():
         return ("Paused")
 
 
-def send_distraction():
-    return
+def bci_not_connected():
+    # Trigger a client side message to the user telling them that the bci is not connected
+    socketio.emit('bci_not_connected', {'error_data': 'bci_not_connected'})
 
-def send_analytics():
-    return
+# This is a server-originated socket event
+def send_distraction():
+    socketio.emit('distraction', {'distraction_data': True})
+
+
+# This is a response to a client request to the server
+@socketio.on('/retrieve_analytics')
+def send_analytics(json):
+    emit('analytics', json)
 
 
 def start_logging():
@@ -74,12 +98,14 @@ def pause_logging():
 
 
 def resume_logging():
-
-
-@app.teardown_appcontext
-def teardown():
     return
 
 
+""""@app.teardown_appcontext
+def teardown():
+    return"""
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
+    # app.run(debug=True)
