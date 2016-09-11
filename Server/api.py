@@ -1,5 +1,8 @@
 # API
 
+# TODO: add comments to functions
+# TODO: Move initialization logic into global function, call in main
+
 import os
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, send_from_directory
