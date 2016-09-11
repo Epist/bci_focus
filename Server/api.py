@@ -4,8 +4,11 @@ import os
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 from openbci_control import OpenBCIAdapter
-# create our little application :)
+from flask_socketio import SocketIO, send, emit
+
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 BCI_instance = OpenBCIAdapter()
 
 
@@ -56,7 +59,9 @@ def resume_streaming():
         return ("Paused")
 
 
+@app.route('/send_distraction')
 def send_distraction():
+
     return
 
 def send_analytics():
@@ -85,4 +90,5 @@ def teardown():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
+    # app.run(debug=True)
