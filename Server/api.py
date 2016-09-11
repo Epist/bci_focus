@@ -74,6 +74,7 @@ def pause_logging():
 
 
 def resume_logging():
+    return
 
 
 @app.teardown_appcontext
