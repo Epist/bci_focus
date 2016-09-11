@@ -5,7 +5,7 @@
         .directive('livestreamChart', ['livestreamService', LineChart]);
 
 
-    var livestreamService, chart, linkFn, running, mockData, i;
+    var livestreamService, chart, linkFn, running, mockData, i, currData;
 
 
     function LineChart(livestream) {
@@ -21,6 +21,7 @@
     function LineChartLinkFn(scope, element, attr) {
         linkFn = this;
         running = scope.getIsStreamRunning;
+        currData = scope.incrementAndGetCurrentData;
         mockData = scope.mockData;
         i = 0;
         console.log(running);
@@ -69,10 +70,10 @@
                 shift = series.data.length > 20; // shift if the series is
                                                  // longer than 20
             if(i >= mockData.length){
-                i = mockData.length - 1;
+                i = mockData.length - 2;
             }
 
-            var point = [Date.now(), mockData[++i]];
+            var point = [Date.now(), currData()];
 
 
             // add the point
