@@ -10,7 +10,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 # static_location=dir_path+"/Client/bin"
 static_location = "/Users/Larry/PycharmProjects/bci_focus/Client/bin"
 # print(static_location)
-app = Flask(__name__, static_folder=static_location, static_url_path=static_location)
+app = Flask(__name__, static_folder=static_location)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 BCI_instance = OpenBCIControl()
