@@ -63,7 +63,7 @@
                     trunc_conc=Math.trunc($scope.concentration);
                     document.getElementById("concentrationScore").innerHTML = trunc_conc + '% Focused';
                     $scope.concentrationColor();
-                    if ($scope.timerWithInterval == 3000) {
+                    if ($scope.timerWithInterval == 3500) {
                         $scope.playAlert();
                     }
                 };
