@@ -3,13 +3,13 @@
 import os
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
-from openbci_control import OpenBCIAdapter
+from openbci_control import openbci_control
 from flask_socketio import SocketIO, send, emit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
-BCI_instance = OpenBCIAdapter()
+BCI_instance = openbci_control()
 
 
 
@@ -59,15 +59,15 @@ def resume_streaming():
         return ("Paused")
 
 
-# @app.route('/send_distraction')
-@socketio.on('/send_distraction')
-def send_distraction(data):
-    emit('distraction', data, broadcast=True)
+# This is a server-originated socket event
+def send_distraction():
+    socketio.emit('distraction', {'distraction_data': True})
 
 
-def send_analytics():
-    emit('analytics', data, broadcast=True)
-    return
+# This is a response to a client request to the server
+@socketio.on('/retrieve_analytics')
+def send_analytics(json):
+    emit('analytics', json)
 
 
 def start_logging():
