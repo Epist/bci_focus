@@ -11,7 +11,7 @@
         //timer with interval
         $scope.timerWithInterval = 0;
         $scope.running = false;
-        $scope.concentration = 80;
+        $scope.concentration = 0;
         $scope.isDisplayStreaming = false;
         $scope.isStreamRunning = false;
 
@@ -40,17 +40,14 @@
             return $scope.isStreamRunning;
         };
 
-        $scope.getCurrentData = function(){
-            return currData;
-        };
-
         $scope.incrementAndGetCurrentData = function(){
             if(i >= $scope.mockData.length){
                  i = $scope.mockData.length - 2;
             }
             currData = $scope.mockData[++i];
+            $scope.concentration=currData*100;
 
-            return $scope.getCurrentData();
+            return currData;
         };
 
 
@@ -63,7 +60,8 @@
                 }
                 $scope.onInterval = function () {
                     $scope.timerWithInterval++;
-                    document.getElementById("concentrationScore").innerHTML = $scope.concentration + '% Focused';
+                    trunc_conc=Math.trunc($scope.concentration);
+                    document.getElementById("concentrationScore").innerHTML = trunc_conc + '% Focused';
                     $scope.concentrationColor();
                     if ($scope.timerWithInterval == 3000) {
                         $scope.playAlert();
