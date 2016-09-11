@@ -9,17 +9,15 @@
         'ui.router'
     ])
 
-    .config(["$stateProvider", "$urlRouterProvider", function myAppConfig($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.otherwise('/home');
-      $stateProvider
-        .state('root', {
-          url: '',
-          abstract: true,
-          views: {
-
-          }
-        });
-    }])
+        .config(function myAppConfig($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise('/home');
+            $stateProvider
+                .state('root', {
+                    url: '',
+                    abstract: true,
+                    views: {}
+                });
+        })
 
         .run(function run() {
         })

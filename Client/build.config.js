@@ -70,7 +70,8 @@ module.exports = {
       'vendor/jquery/dist/jquery.min.js',
       'vendor/mqttws/mqttws31.js',
       'vendor/msgpack-javascript/msgpack.js',
-      'vendor/neuroscale-js-client/neuroscale-js-client.js'
+      'vendor/neuroscale-js-client/neuroscale-js-client.js',
+      'vendor/highcharts/highcharts.js'
     ],
     css: [
     ],
