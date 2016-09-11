@@ -87,10 +87,17 @@ module.exports = function (grunt) {
         /**
          * The directories to delete when `grunt clean` is executed.
          */
-        clean: [
-            '<%= build_dir %>',
-            '<%= compile_dir %>'
-        ],
+        clean: {
+            build: {
+                src: [
+                    '<%= build_dir %>',
+                    '<%= compile_dir %>'
+                ],
+                options: {
+                    force: true
+                }
+            }
+        },
 
         /**
          * The `copy` task just copies files from A to B. We use it here to copy
@@ -570,7 +577,7 @@ module.exports = function (grunt) {
      * before watching for changes.
      */
     grunt.renameTask('watch', 'delta');
-    grunt.registerTask( 'watch', [ 'build', 'karma:unit', 'express', 'delta' ] );
+    grunt.registerTask('watch', ['build', 'karma:unit', 'express', 'delta']);
 
 
     /**
