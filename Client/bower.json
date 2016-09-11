@@ -7,7 +7,8 @@
     "bootstrap": "~3.1",
     "angular-bootstrap": "~0.10.0",
     "angular-ui-router": "~0.2",
-    "mqttws": "^1.0.0"
+    "mqttws": "^1.0.0",
+    "highcharts": "^4.2.6"
   },
   "dependencies": {}
 }
