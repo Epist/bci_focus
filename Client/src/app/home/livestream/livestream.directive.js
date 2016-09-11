@@ -45,8 +45,8 @@
             yAxis: {
                 minPadding: 0.2,
                 maxPadding: 0.2,
-                minRange: 0,
-                maxRange: 1,
+                min: 0,
+                max: 1,
                 title: {
                     text: 'Concentration %',
                     margin: 80
