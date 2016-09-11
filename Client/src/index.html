@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="AppCtrl">
+  <head>
+    <title ng-bind="pageTitle"></title>
+
+    <!-- social media tags -->
+    <meta property="og:title" content="HealthyHeart" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="A simple app for a healthy heart.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- font awesome from BootstrapCDN -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+  </head>
+  <body>
+
+    <div ng-include="'header.tpl.html'"></div>
+
+    <div id="main">
+      <div class="container" id="page" ui-view="main"></div>
+    </div>
+
+    <div ng-include="'footer.tpl.html'"></div>
+  </body>
+</html>
