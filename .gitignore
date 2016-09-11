@@ -2,3 +2,4 @@
 /Client/bin/
 /Client/node_modules/
 /Client/build/
+/Server/static/
