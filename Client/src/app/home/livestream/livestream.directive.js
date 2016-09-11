@@ -5,32 +5,32 @@
         .directive('livestreamChart', ['livestreamService', LineChart]);
 
 
-    var livestreamService, chart, linkFn;
+    var livestreamService, chart, linkFn, running;
 
     function LineChart(livestream) {
         livestreamService = livestream;
         return {
             restrict: 'E',
-            template: '<div id="container"></div>',
-            scope: {
-                weights: '='
-            },
+            template: '<div id="hcContainer"></div>',
+            replace: true,
             link: LineChartLinkFn
         };
     }
 
-    function LineChartLinkFn(scope, element) {
+    function LineChartLinkFn(scope, element, attr) {
         linkFn = this;
+        running = scope.getIsStreamRunning;
+
         chart = new Highcharts.Chart({
             chart: {
-                renderTo: 'container',
+                renderTo: 'hcContainer',
                 defaultSeriesType: 'spline',
                 events: {
                     load: requestData
                 }
             },
             title: {
-                text: 'Live random data'
+                text: ''
             },
             xAxis: {
                 type: 'datetime',
@@ -41,12 +41,13 @@
                 minPadding: 0.2,
                 maxPadding: 0.2,
                 title: {
-                    text: 'Value',
+                    text: 'Concentration %',
                     margin: 80
                 }
             },
             series: [{
-                name: 'Random data',
+                showInLegend: false,
+                name: 'Concentration Values',
                 data: []
             }]
         });
@@ -55,10 +56,9 @@
     }
 
     function requestData() {
+        console.log('reached', running());
 
-        if (!!chart) {
-
-            console.log('reached');
+        if (!!chart && running()) {
             var series = chart.series[0],
                 shift = series.data.length > 20; // shift if the series is
                                                  // longer than 20
@@ -66,10 +66,10 @@
 
             // add the point
             chart.series[0].addPoint(point, true, shift);
-
-            console.log(chart.series[0].data);
         }
+
         setTimeout(requestData, 1000);
+
     }
 
 })();

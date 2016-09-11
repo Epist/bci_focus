@@ -8,7 +8,7 @@
 
             </span>
         </h2>
-        <span id="startStop" href="#Toggle_StartStop" ng-click="startStopTimerWithInterval()"
+        <span id="startStop" ng-click="startStopTimerWithInterval()"
               class="btn btn-large btn-primary">
             Start BCI
         </span>
@@ -18,6 +18,6 @@
 </div>
 <div class="row">
     <h3> This div is for the visualization element </h3>
-    <livestream-chart></livestream-chart>
+    <span ng-if="isDisplayingStream"></span><livestream-chart></livestream-chart>
 
 </div>

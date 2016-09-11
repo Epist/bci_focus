@@ -1,4 +1,4 @@
-(function(){
+(function () {
     angular.module('app.home')
         .controller('HomeCtrl', ['RESTService', '$scope', '$timeout', '$interval', HomeController]);
 
@@ -8,29 +8,12 @@
         ctrl = this;
         rest = RESTService;
 
-        //        //timer with timeout
-        //  $scope.timerWithTimeout = 0;
-        //  $scope.startTimerWithTimeout = function() {
-        //   $scope.timerWithTimeout = 0;
-        //   if($scope.myTimeout){
-        //     $timeout.cancel($scope.myTimeout);
-        //   }
-        //   $scope.onTimeout = function(){
-        //       $scope.timerWithTimeout++;
-        //       $scope.myTimeout = $timeout($scope.onTimeout,1000);
-        //   };
-        //   $scope.myTimeout = $timeout($scope.onTimeout,1000);
-        // };
-        //
-        // $scope.resetTimerWithTimeout = function(){
-        //   $scope.timerWithTimeout = 0;
-        //   $timeout.cancel($scope.myTimeout);
-        // };
-
         //timer with interval
         $scope.timerWithInterval = 0;
         $scope.running = false;
         $scope.concentration = 80;
+        $scope.isDisplayStreaming = false;
+        $scope.isStreamRunning = false;
 
         $scope.startStopTimerWithInterval = function () {
             if (!$scope.running) {
@@ -78,6 +61,26 @@
             }
         };
 
+
+        $scope.showStreamDisplay = function () {
+            $scope.isDisplayStreaming = true;
+        };
+
+        $scope.hideStreamDisplay = function () {
+            $scope.isDisplayStreaming = false;
+        };
+
+        $scope.startStreamDisplay = function () {
+            $scope.isStreamRunning = true;
+        };
+
+        $scope.stopStreamDisplay = function () {
+            $scope.isStreamRunning = false;
+        };
+
+        $scope.getIsStreamRunning = function () {
+            return $scope.isStreamRunning;
+        };
 
 
     }
