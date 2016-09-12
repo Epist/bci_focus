@@ -1,12 +1,14 @@
 {
-  "name": "ng-boilerplate",
-  "version": "0.3.2",
+  "name": "bci_focus",
+  "version": "0.0.0",
   "devDependencies": {
     "angular": "~1.2",
     "angular-mocks": "~1.2",
     "bootstrap": "~3.1",
     "angular-bootstrap": "~0.10.0",
-    "angular-ui-router": "~0.2"
+    "angular-ui-router": "~0.2",
+    "mqttws": "^1.0.0",
+    "highcharts": "^4.2.6"
   },
   "dependencies": {}
 }

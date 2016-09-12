@@ -21,7 +21,7 @@
             if (ms < 10) {
                 ms = "0" + ms;
             }
-            var current_time = hours + ':' + minutes + ':' + seconds + "." + ms;
+            var current_time = hours + ' hr ' + minutes + ' min ' + seconds + "." + ms + " sec";
             return current_time;
         };
     });

@@ -1,25 +1,24 @@
-<div>
-    <!--<label>Timer with timeout: {{timerWithTimeout | hhmmss}}</label>-->
-    <!--<button ng-click="startTimerWithTimeout()">Start Timer</button>-->
-    <!--<button ng-click="resetTimerWithTimeout()">reset tiemr</button>-->
-    <!--<br><br>-->
-    <div class="row">
-        <div class="jumbotron">
-            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<div class="row">
+    <div class="jumbotron">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
 
-            <h2>Task time: {{timerWithInterval | hhmmss}}
-                <span id="startStop" href="#Toggle_StartStop" ng-click="startStopTimerWithInterval()"
-                      class="btn btn-large btn-primary">
-                Start BCI
-                </span>
-            </h2>
-            <!--<label>Time so far: {{ timerWithInterval | number : 'h:mm:ss' }}</label>-->
+        <h2>Task time: {{timerWithInterval | hhmmss}}
 
-        </div>
-    </div>
-    <div class="row">
-        This div is for the visualization element
+            <span id="concentrationScore">
+
+            </span>
+        </h2>
+        <span id="startStop" ng-click="startStopTimerWithInterval()"
+              class="btn btn-large btn-primary">
+            Start BCI
+        </span>
+        <!--<label>Time so far: {{ timerWithInterval | number : 'h:mm:ss' }}</label>-->
 
     </div>
+</div>
+<div class="row">
+    <span id="live-focus" ng-if="isDisplayStreaming">
+        <livestream-chart></livestream-chart>
+    </span>
 
 </div>
