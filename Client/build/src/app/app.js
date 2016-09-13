@@ -9,7 +9,7 @@
         'ui.router'
     ])
 
-        .config(function myAppConfig($stateProvider, $urlRouterProvider) {
+        .config(["$stateProvider", "$urlRouterProvider", function myAppConfig($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/home');
             $stateProvider
                 .state('root', {
@@ -17,7 +17,7 @@
                     abstract: true,
                     views: {}
                 });
-        })
+        }])
 
         .run(function run() {
         })
@@ -26,12 +26,12 @@
 
         .constant('NEUROSCALE_API_URL', 'https://api.neuroscale.io')
 
-        .controller('AppCtrl', function AppCtrl($scope, $location) {
+        .controller('AppCtrl', ["$scope", "$location", function AppCtrl($scope, $location) {
             // $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             //   if (angular.isDefined(toState.data.pageTitle)) {
             //     $scope.pageTitle = toState.data.pageTitle + ' | Ejenta';
             //   }
             // });
-        });
+        }]);
 
 })();

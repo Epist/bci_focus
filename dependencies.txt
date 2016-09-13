@@ -1,0 +1,12 @@
+Dependencies:
+
+python3
+    Packages (install via "pip3 install"):
+    flask
+    paho-mqtt
+    msgpack-python
+    pylsl
+    pyserial
+    numpy
+    flask_socketio
+    eventlet
